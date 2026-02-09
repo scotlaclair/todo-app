@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const todoInput = document.getElementById('todo-input');
     const addBtn = document.getElementById('add-btn');
     const todoList = document.getElementById('todo-list');
+<<<<<<< HEAD
     const emptyState = document.getElementById('todo-empty-state');
 
     // Update empty state visibility
@@ -13,6 +14,22 @@ document.addEventListener('DOMContentLoaded', function() {
             emptyState.setAttribute('hidden', '');
         }
     }
+=======
+    const themeToggle = document.getElementById('theme-toggle');
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+        const isDark = document.body.classList.contains('dark-theme');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+>>>>>>> 4431b04 (Implement theme toggle functionality and enhance styling for dark mode)
 
     addBtn.addEventListener('click', addTodo);
     todoInput.addEventListener('keypress', function(e) {
