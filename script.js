@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const emptyState = document.getElementById('todo-empty-state');
 
     // Update empty state visibility
-    // Note: checking todoList.children only (the <ul>), not the sibling <p> empty state element
+    // Note: checking children of the <ul> element only, not its sibling <p> empty state element
     function updateEmptyState() {
         if (todoList.children.length === 0) {
             emptyState.removeAttribute('hidden');
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             deleteBtn.disabled = true;
             li.classList.add('removing');
             setTimeout(() => {
-                // Make removal idempotent in case the <li> is already detached
+                // Guard against removing an already-detached element
                 if (li.parentNode === todoList) {
                     todoList.removeChild(li);
                     updateEmptyState();
