@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const emptyState = document.getElementById('todo-empty-state');
 
     // Update empty state visibility
+    // Note: checking todoList.children only (the <ul>), not the sibling <p> empty state element
     function updateEmptyState() {
         if (todoList.children.length === 0) {
             emptyState.removeAttribute('hidden');

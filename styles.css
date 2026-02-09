@@ -235,7 +235,12 @@ li span {
         transform: none;
     }
     
-    * {
-        transition: none !important;
+    #todo-input,
+    #add-btn,
+    .delete-btn,
+    li,
+    li span,
+    .complete-checkbox {
+        transition: none;
     }
 }
