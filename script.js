@@ -30,7 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         deleteBtn.addEventListener('click', function() {
-            todoList.removeChild(li);
+            li.classList.add('removing');
+            setTimeout(() => {
+                todoList.removeChild(li);
+            }, 400);
         });
 
         todoList.appendChild(li);
