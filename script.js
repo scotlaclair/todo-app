@@ -2,6 +2,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const todoInput = document.getElementById('todo-input');
     const addBtn = document.getElementById('add-btn');
     const todoList = document.getElementById('todo-list');
+    const emptyState = document.getElementById('todo-empty-state');
+
+    // Update empty state visibility
+    function updateEmptyState() {
+        if (todoList.children.length === 0) {
+            emptyState.removeAttribute('hidden');
+        } else {
+            emptyState.setAttribute('hidden', '');
+        }
+    }
 
     addBtn.addEventListener('click', addTodo);
     todoInput.addEventListener('keypress', function(e) {
@@ -30,13 +40,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         deleteBtn.addEventListener('click', function() {
+            // Prevent multiple delete actions from being scheduled
+            deleteBtn.disabled = true;
             li.classList.add('removing');
             setTimeout(() => {
-                todoList.removeChild(li);
+                // Make removal idempotent in case the <li> is already detached
+                if (li.parentNode === todoList) {
+                    todoList.removeChild(li);
+                    updateEmptyState();
+                }
             }, 400);
         });
 
         todoList.appendChild(li);
         todoInput.value = '';
+        updateEmptyState();
     }
+
+    // Initialize empty state
+    updateEmptyState();
 });

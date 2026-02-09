@@ -136,6 +136,7 @@ li:hover {
 
 li.removing {
     animation: fadeOutSlide 0.4s ease-out;
+    animation-fill-mode: forwards;
 }
 
 @keyframes fadeOutSlide {
@@ -200,12 +201,41 @@ li span {
 }
 
 /* Empty state message */
-#todo-list:empty::after {
-    content: "No todos yet. Add one to get started! ✨";
-    display: block;
+#todo-empty-state {
     text-align: center;
     padding: 40px 20px;
     color: #a0aec0;
     font-style: italic;
     font-size: 16px;
+}
+
+#todo-empty-state[hidden] {
+    display: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .container {
+        animation: none;
+    }
+    
+    li {
+        animation: none;
+    }
+    
+    li.removing {
+        animation: none;
+        opacity: 0;
+    }
+    
+    #add-btn:hover,
+    .delete-btn:hover,
+    li:hover,
+    .complete-checkbox:hover {
+        transform: none;
+    }
+    
+    * {
+        transition: none !important;
+    }
 }
